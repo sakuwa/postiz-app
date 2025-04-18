@@ -432,10 +432,12 @@ export class PostsService {
       );
 
       for (const post of publishedPosts) {
+      // fallback auf leere Zeichenkette, falls releaseURL doch fehlt
+        const url = post.releaseURL ?? '';
         await this._postRepository.updatePost(
           post.id,
           post.postId,
-          post.releaseURL
+          url
         );
       }
 
