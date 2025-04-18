@@ -432,6 +432,10 @@ export class PostsService {
       );
 
       for (const post of publishedPosts) {
+        if (!post.releaseURL) {
+          this.logger.error('Missing releaseURL for post ID ${post.id]');
+          continue; //oder Fehler werfen oder überspringen
+        }
         await this._postRepository.updatePost(
           post.id,
           post.postId,
